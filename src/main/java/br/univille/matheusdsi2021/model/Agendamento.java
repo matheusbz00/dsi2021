@@ -19,6 +19,7 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String descricao;
+    private Date dataHora;
 
     @ManyToMany(cascade = CascadeType.REFRESH)
     @JoinColumn(name="usuario_id")
@@ -43,6 +44,5 @@ public class Agendamento {
     public void setDataHora(Date dataHora) {
         this.dataHora = dataHora;
     }
-    private Date dataHora;
     
 }

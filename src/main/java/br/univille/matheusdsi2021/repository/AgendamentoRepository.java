@@ -7,6 +7,6 @@ import br.univille.matheusdsi2021.model.Agendamento;
 
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento,Long> {
-    List<Agendamento> findByNomeContains(String descricao);
+    //List<Agendamento> findByNomeContains(String descricao);
     
 }
