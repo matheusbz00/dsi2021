@@ -3,6 +3,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import br.univille.matheusdsi2021.model.Agendamento;
@@ -20,6 +22,18 @@ public class AgendamentoController {
     public ModelAndView index(){
         List<Agendamento> listaAgendamentos = service.getAll();
         return new ModelAndView("agendamento/index", "listaAgendamentos", listaAgendamentos);
+    }
+
+    @GetMapping("/novo")
+    public ModelAndView novo(@ModelAttribute Agendamento agendamento){
+        return new ModelAndView("agendamento/form");
+    }
+
+    @PostMapping(params="form")
+    public ModelAndView save(Agendamento agendamento){
+        System.out.println(agendamento.getDescricao());
+        return new ModelAndView("agendamento/form");
+
     }
     
 }
