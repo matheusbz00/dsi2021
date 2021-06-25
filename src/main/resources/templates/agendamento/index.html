@@ -6,19 +6,20 @@
     <body>
         <div class="container">
             <nav th:replace="layout :: menu">(menu)</nav>
-            <a href="@{/agendamento/novo}" class="btn btn-primary">Novo Agendamento</a>
+            <a th:href="@{/agendamento/novo}" class="btn btn-primary">Novo Agendamento</a>
             <table class="table">
                 <thead>
                     <tr>
                         <th>Descrição:</th>
                         <th>Horario:</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr scope="row" th:each="umagendamento : ${listaAgendamentos}"
-                        class="table-primary">
+                    <tr scope="row" th:each="umagendamento : ${listaAgendamentos}">
                         <td th:text="${umagendamento.descricao}"></td>
                         <td th:text="${umagendamento.dataHora}"></td>
+                        <td><a th:href="@{'/agendamento/alterar/'+${umagendamento.id}}" class="btn btn-secondary">Alterar</a></td>
                     </tr>
                 </tbody>
             </table>

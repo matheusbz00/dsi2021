@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,8 +32,15 @@ public class AgendamentoController {
 
     @PostMapping(params="form")
     public ModelAndView save(Agendamento agendamento){
+        service.save(agendamento);
+        return new ModelAndView("redirect:/agendamento");
+
+    }
+
+    @GetMapping("alterar/{id}")
+    public ModelAndView alterar(@PathVariable("id") Agendamento agendamento){
         System.out.println(agendamento.getDescricao());
-        return new ModelAndView("agendamento/form");
+        return new ModelAndView("/agendamento/form","agendamento",agendamento);
 
     }
     

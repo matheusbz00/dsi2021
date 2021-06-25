@@ -19,5 +19,10 @@ public class AgendamentoServiceImpl implements AgendamentoService{
 	public List<Agendamento> getAll() {
 		return repository.findAll();
 	}
+
+	@Override
+	public void save(Agendamento agendamento) {
+		repository.save(agendamento);
+	}
     
 }
