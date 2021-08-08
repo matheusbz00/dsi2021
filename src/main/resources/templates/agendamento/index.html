@@ -7,7 +7,7 @@
         <div class="container">
             <nav th:replace="layout :: menu">(menu)</nav>
             <a th:href="@{/agendamento/novo}" class="btn btn-primary">Novo Agendamento</a>
-            <table class="table">
+            <table class="table" id="agendamentos">
                 <thead>
                     <tr>
                         <th>Descrição:</th>
@@ -19,11 +19,29 @@
                     <tr scope="row" th:each="umagendamento : ${listaAgendamentos}">
                         <td th:text="${umagendamento.descricao}"></td>
                         <td th:text="${umagendamento.dataHora}"></td>
-                        <td><a th:href="@{'/agendamento/alterar/'+${umagendamento.id}}" class="btn btn-secondary">Alterar</a></td>
+                        <td>
+                            <a th:href="@{'/agendamento/alterar/'+${umagendamento.id}}" class="btn btn-secondary">Alterar</a>
+                            <button class="btn btn-danger js-delete"
+                                    th:data-id="${umagendamento.id}">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Excluir</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>      
         <div th:include="layout :: footer">(footer)</div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $("#agendamentos").on('click', ".js-delete",function(){
+                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                        console.log(result);
+
+                    });
+                });
+
+            });    
+        </script>
     </body>
 </html>
