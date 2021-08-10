@@ -24,5 +24,9 @@ public class AgendamentoServiceImpl implements AgendamentoService{
 	public void save(Agendamento agendamento) {
 		repository.save(agendamento);
 	}
-    
+	
+	@Override
+    public void delete(Agendamento agendamento) {
+        repository.delete(agendamento);
+    }
 }

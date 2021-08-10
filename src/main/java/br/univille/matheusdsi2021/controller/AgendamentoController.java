@@ -43,5 +43,11 @@ public class AgendamentoController {
         return new ModelAndView("/agendamento/form","agendamento",agendamento);
 
     }
+
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") Agendamento agendamento){
+        service.delete(agendamento);
+        return new ModelAndView("redirect:/agendamento");
+    }
     
 }
