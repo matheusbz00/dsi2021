@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head th:include="layout :: htmlhead"></head>
+
+    <body>
+        <div class="container">
+            <nav th:replace="layout :: menu">(menu)</nav>
+            <a th:href="@{/produtora/novo}" class="btn btn-primary">Novo Produtora</a>
+            <table class="table" id="produtoras">
+                <thead>
+                    <tr>
+                        <th>Nome:</th>
+                        <th>Data de Fundação:</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr scope="row" th:each="umprodutora : ${listaProdutoras}">
+                        <td th:text="${umprodutora.descricao}"></td>
+                        <td th:text="${umprodutora.dataHora}"></td>
+                        <td>
+                            <a th:href="@{'/produtora/alterar/'+${umprodutora.id}}" class="btn btn-secondary">Alterar</a>
+                            <button class="btn btn-danger js-delete"
+                                    th:data-id="${umprodutora.id}">
+                                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                Excluir</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>      
+        <div th:include="layout :: footer">(footer)</div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                $("#produtoras").on('click', ".js-delete",function(){
+                    let button = $(this);
+                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/produtora/delete/" + button.attr("data-id"),
+                                method : "GET",
+                                success : function(){
+                                    window.location.href = "/produtora/";
+                                }
+                            })
+                        }
+
+                    });
+                });
+
+            });    
+        </script>
+    </body>
+</html>
