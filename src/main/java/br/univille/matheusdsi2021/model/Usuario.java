@@ -1,10 +1,14 @@
 package br.univille.matheusdsi2021.model;
-import java.util.Date;
 
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Usuario {
@@ -19,8 +23,19 @@ public class Usuario {
     private String email;
     private String jogos;
     private String endereco;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(value = TemporalType.DATE)
     private Date dataNascimento;
     private String login;
+    private String senha;
+    private String foto;
+
+    public String getFoto() {
+        return foto;
+    }
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public long getId() {
         return id;
@@ -83,14 +98,7 @@ public class Usuario {
     public void setLogin(String login) {
         this.login = login;
     }
-    private String senha;
-
-    public String getUsuario() {
-        return login;
-    }
-    public void setUsuario(String usuario) {
-        this.login = usuario;
-    }
+    
     public String getSenha() {
         return senha;
     }

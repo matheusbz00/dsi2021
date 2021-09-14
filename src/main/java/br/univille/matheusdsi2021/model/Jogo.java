@@ -1,17 +1,19 @@
 package br.univille.matheusdsi2021.model;
 
 
-import java.util.ArrayList;
+
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Jogo {
@@ -23,14 +25,22 @@ public class Jogo {
     private String genero;
     private String plataformas;
     private String modos;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(value = TemporalType.DATE)
     private Date dataLancamento;
     private int faixaEtaria;
 
-    @ManyToMany(cascade = CascadeType.REFRESH)
-    @JoinColumn(name="usuario_id")
-    private List<Usuario> usuario = 
-        new ArrayList<Usuario>();
-    
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
+    private Produtora produtora;
+
+
+    public Produtora getProdutora() {
+        return produtora;
+    }
+    public void setProdutora(Produtora produtora) {
+        this.produtora = produtora;
+    }
+
     public long getId() {
         return id;
     }
