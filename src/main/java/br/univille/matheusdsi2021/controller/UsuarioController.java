@@ -45,6 +45,11 @@ public class UsuarioController {
         return new ModelAndView("usuario/form");
     }
 
+    @GetMapping("/login")
+    public ModelAndView login(@ModelAttribute Usuario usuario){
+        return new ModelAndView("usuario/login");
+    }
+
     @PostMapping(params="form")
     public ModelAndView save(Usuario usuario, @RequestParam("file") MultipartFile file){
         if(file.getSize() != 0){
