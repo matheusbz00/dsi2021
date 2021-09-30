@@ -5,9 +5,29 @@
     <head th:include="layout :: htmlhead"></head>
 
     <body>
-        <div class="container">
+        <div class="">
             <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
-            <div class="border border-dark">
+            <div class="card" style="margin:2%;">
+                <div class="card-header">
+                    <h5 style="text-align: center; margin: 1% 0 2% 0;">Cadastro de Produtora</h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/produtora/(form)}" th:object="${produtora}" method="POST" style="margin: 1%;">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label >Nome</label>
+                                <input type="text" th:field="*{nome}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label >Data de Fundação</label>
+                                <input type="text" th:field="*{dataFundacao}" class="form-control">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </form>
+                </div>
+              </div>
+            <!-- <div class="border border-dark">
                 <form th:action="@{/produtora/(form)}" th:object="${produtora}" method="POST">
                     <input type="hidden" th:field="*{id}">
                     <div class="form-group">
@@ -29,7 +49,7 @@
 
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
-            </div>
+            </div> -->
         </div>
         <div th:include="layout :: footer">(footer)</div>
     </body>

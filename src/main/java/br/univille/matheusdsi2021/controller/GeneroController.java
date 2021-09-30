@@ -36,7 +36,7 @@ public class GeneroController {
         return new ModelAndView("redirect:/genero");
 
     }
-
+    
     @GetMapping("alterar/{id}")
     public ModelAndView alterar(@PathVariable("id") Genero genero){
         System.out.println(genero.getNome());

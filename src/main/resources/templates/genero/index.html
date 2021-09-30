@@ -4,10 +4,34 @@
     <head th:include="layout :: htmlhead"></head>
 
     <body>
-        <div class="container">
+        <div class="">
             <nav th:replace="layout :: menu">(menu)</nav>
-            <a th:href="@{/genero/novo}" class="btn btn-primary">Novo Genero</a>
-            <table class="table" id="generos">
+            <div style="margin: 1% 0 0 2%">
+                <a th:href="@{/genero/novo}" class="btn btn-secondary">+ Inserir Gênero</a>
+            </div>
+
+            <div style="margin: 0 2% 0 2%;">
+                <h5 style="text-align: center; margin: 1% 0 2% 0;">Gêneros</h5>
+                <table class="table table-striped" id="generos">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="umgenero : ${listaGeneros}">
+                            <td>
+                                <a th:href="@{'/genero/alterar/'+${umgenero.id}}"><span class="glyphicon glyphicon-edit" style="color: black;"></span></a>
+                                <a th:data-id="${umgenero.id}" class="js-delete"> <span class="glyphicon glyphicon-trash" style="color: black;"></span></a>
+                            </td>
+                            <td th:text="${umgenero.nome}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- <table class="table" id="generos">
                 <thead>
                     <tr>
                         <th>Nome:</th>
@@ -26,7 +50,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>      
         <div th:include="layout :: footer">(footer)</div>
 

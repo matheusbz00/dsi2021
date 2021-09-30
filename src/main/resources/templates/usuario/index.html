@@ -4,9 +4,51 @@
     <head th:include="layout :: htmlhead"></head>
 
     <body>
-        <div class="container">
+        <div class="">
             <nav th:replace="layout :: menu">(menu)</nav>
-            <a th:href="@{/usuario/novo}" class="btn btn-primary">Novo Usuario</a>
+            <div style="margin: 1% 0 0 2%">
+                <a th:href="@{/usuario/novo}" class="btn btn-secondary">+ Inserir Usuario</a>
+            </div>
+
+            <div style="margin: 0 2% 0 2%;">
+                <h5 style="text-align: center; margin: 1% 0 2% 0;">Usuários</h5>
+                <table class="table table-striped" id="usuarios">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome</th>
+                            <th>Sobrenome</th>
+                            <th>Idade</th>
+                            <th>Nickname</th>
+                            <th>E-mail</th>
+                            <th>Jogos</th>
+                            <th>Endereço</th>
+                            <th>Data de Nascimento</th>
+                            <th>Login</th>
+                            <th>Senha</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="umusuario : ${listaUsuarios}">
+                            <td>
+                                <a th:href="@{'/usuario/alterar/'+${umusuario.id}}"><span class="glyphicon glyphicon-edit" style="color: black;"></span></a>
+                                <a th:data-id="${umusuario.id}" class="js-delete"> <span class="glyphicon glyphicon-trash" style="color: black;"></span></a>
+                            </td>
+                            <td th:text="${umusuario.nome}"></td>
+                            <td th:text="${umusuario.sobrenome}"></td>
+                            <td th:text="${umusuario.idade}"></td>
+                            <td th:text="${umusuario.nickName}"></td>
+                            <td th:text="${umusuario.email}"></td>
+                            <td th:text="${umusuario.jogos}"></td>
+                            <td th:text="${umusuario.endereco}"></td>
+                            <td th:text="${#dates.format(umusuario.dataNascimento, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${umusuario.login}"></td>
+                            <td th:text="${umusuario.senha}"></td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+<!-- 
             <table class="table" id="usuarios">
                 <thead>
                     <tr>
@@ -44,7 +86,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>      
         <div th:include="layout :: footer">(footer)</div>
 
@@ -53,7 +95,7 @@
                 
                 $("#usuarios").on('click', ".js-delete",function(){
                     let button = $(this);
-                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                    bootbox.confirm("Deseja realmente deletar este registro?",function(result){
                         if(result){
                             $.ajax({
                                 url : "/usuario/delete/" + button.attr("data-id"),

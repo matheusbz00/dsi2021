@@ -4,10 +4,36 @@
     <head th:replace="layout :: htmlhead"></head>
 
     <body>
-        <div class="container">
+        <div class="">
             <nav th:replace="layout :: menu (buttons = ${ {{'link1','label1'},{'link2','label2'}} })">(menu)</nav>
-            <a th:href="@{/agendamento/novo}" class="btn btn-primary">Novo Agendamento</a>
-            <table class="table" id="agendamentos">
+            <div style="margin: 1% 0 0 2%">
+                <a th:href="@{/agendamento/novo}" class="btn btn-secondary">+ Inserir Agendamento</a>
+            </div>
+
+            <div style="margin: 0 2% 0 2%;">
+                <h5 style="text-align: center; margin: 1% 0 2% 0;">Agendamentos</h5>
+                <table class="table table-striped" id="agendamentos">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="umagendamento : ${listaAgendamentos}">
+                            <td>
+                                <a th:href="@{'/agendamento/alterar/'+${umagendamento.id}}"><span class="glyphicon glyphicon-edit" style="color: black;"></span></a>
+                                <a th:data-id="${umagendamento.id}" class="js-delete"> <span class="glyphicon glyphicon-trash" style="color: black;"></span></a>
+                            </td>
+                            <td th:text="${umagendamento.descricao}"></td>
+                            <td th:text="${#dates.format(umagendamento.dataHora, 'dd/MM/yyyy hh:mm')}"></td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            
+            <!-- <table class="table" id="agendamentos">
                 <thead>
                     <tr>
                         <th>Descrição:</th>
@@ -28,7 +54,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>      
         <div th:replace="layout :: footer">(footer)</div>
 
@@ -37,7 +63,7 @@
                 
                 $("#agendamentos").on('click', ".js-delete",function(){
                     let button = $(this);
-                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                    bootbox.confirm("Deseja realmente deletar este registro?",function(result){
                         if(result){
                             $.ajax({
                                 url : "/agendamento/delete/" + button.attr("data-id"),
