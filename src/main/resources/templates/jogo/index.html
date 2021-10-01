@@ -4,10 +4,44 @@
     <head th:include="layout :: htmlhead"></head>
 
     <body>
-        <div class="container">
+        <div class="">
             <nav th:replace="layout :: menu">(menu)</nav>
-            <a th:href="@{/jogo/novo}" class="btn btn-primary">Novo Jogo</a>
-            <table class="table" id="jogos">
+            <div style="margin: 1% 0 0 2%">
+                <a th:href="@{/jogo/novo}" class="btn btn-secondary">+ Inserir Jogo</a>
+            </div>
+
+            <div style="margin: 0 2% 0 2%;">
+                <h5 style="text-align: center; margin: 1% 0 2% 0;">Jogos</h5>
+                <table class="table table-striped" id="jogos">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome</th>
+                            <th>Gênero</th>
+                            <th>Plataformas</th>
+                            <th>Modos</th>
+                            <th>Data de Lançamento</th>
+                            <th>Faixa Etária</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="umjogo : ${listaJogos}">
+                            <td>
+                                <a th:href="@{'/jogo/alterar/'+${umjogo.id}}"><span class="glyphicon glyphicon-edit" style="color: black;"></span></a>
+                                <a th:data-id="${umjogo.id}" class="js-delete"> <span class="glyphicon glyphicon-trash" style="color: black;"></span></a>
+                            </td>
+                            <td th:text="${umjogo.nome}"></td>
+                            <td th:text="${umjogo.genero}"></td>
+                            <td th:text="${umjogo.plataformas}"></td>
+                            <td th:text="${umjogo.modos}"></td>
+                            <td th:text="${#dates.format(umjogo.dataLancamento, 'dd/MM/yyyy')}"></td>
+                            <td th:text="${umjogo.faixaEtaria}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- <table class="table table-striped" id="jogos">
                 <thead>
                     <tr>
                         <th>Nome:</th>
@@ -36,7 +70,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>      
         <div th:include="layout :: footer">(footer)</div>
 
@@ -45,7 +79,7 @@
                 
                 $("#jogos").on('click', ".js-delete",function(){
                     let button = $(this);
-                    bootbox.confirm("Confirma a exclusão do registro?",function(result){
+                    bootbox.confirm("Deseja realmente deletar este registro?",function(result){
                         if(result){
                             $.ajax({
                                 url : "/jogo/delete/" + button.attr("data-id"),

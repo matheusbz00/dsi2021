@@ -5,29 +5,66 @@
     <head th:replace="layout :: htmlhead"></head>
 
     <body>
-        <div class="container">
+        <div class="">
             <nav th:replace="layout :: menu (buttons = ${ {{'link1','label1'},{'link2','label2'}} })">(menu)</nav>
+            <div style="margin: 1% 0 0 2%">
+                <a th:href="@{/produtora/novo}" class="btn btn-secondary">+ Inserir Produtora</a>
+            </div>
 
-            <a th:href="@{/produtora/novo}" class="btn btn-primary">Nova Produtora</a>
-
-            <table class="table" >
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Data de Fundação</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr scope="row" th:each="umaprodutora : ${listaProdutoras}">
-                        <td th:text="${umaprodutora.nome}"></td>
-                        <td th:text="${umaprodutora.dataFundacao}"></td>
-                        <td>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div style="margin: 0 2% 0 2%;">
+                <h5 style="text-align: center; margin: 1% 0 2% 0;">Produtoras</h5>
+                <table class="table table-striped" id="produtoras">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome</th>
+                            <th>Data de Fundação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr scope="row" th:each="umaprodutora : ${listaProdutoras}">
+                            <!-- <td>
+                                <a th:href="@{'/produtora/alterar/'+${umaprodutora.id}}" class="btn btn-secondary">Alterar</a>
+                                <button class="btn btn-danger js-delete"
+                                        th:data-id="${umaprodutora.id}">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    Excluir</button>
+                            </td> -->
+                            <td>
+                                <a th:href="@{'/produtora/alterar/'+${umaprodutora.id}}"> <span class="glyphicon glyphicon-edit" style="color: black;"></span></a>
+                                <a th:data-id="${umaprodutora.id}" class="js-delete"> <span class="glyphicon glyphicon-trash" style="color: black;"></span></a>
+                            </td>
+                            <td th:text="${umaprodutora.nome}"></td>
+                            <td th:text="${#dates.format(umaprodutora.dataFundacao, 'dd/MM/yyyy')}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
         <div th:replace="layout :: footer">(footer)</div>
+
+        <script type="text/javascript">
+            $(document).ready(function(){
+                
+                $("#produtoras").on('click', ".js-delete",function(){
+                    let button = $(this);
+                    bootbox.confirm("Deseja realmente deletar este registro?",function(result){
+                        if(result){
+                            $.ajax({
+                                url : "/produtora/delete/" + button.attr("data-id"),
+                                method : "GET",
+                                success : function(){
+                                    window.location.href = "/produtora/";
+                                }
+                            })
+                        }
+
+                    });
+                });
+
+            });    
+        </script>
+
     </body>
 </html>

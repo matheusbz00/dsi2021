@@ -4,19 +4,39 @@
         <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.css}" />
         <link rel="stylesheet" th:href="@{/webjars/bootstrap-glyphicons/bdd2cbfba0/css/bootstrap-glyphicons.css}" />
         <link rel="stylesheet" th:href="@{/site.css}" />
+        <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
+
     </head>
     <body>
         <nav th:fragment="menu" class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Sistema</a>
+            <a class="navbar-brand" href="/home"><b>NOBLE STAY</b></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                   <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/home">Home</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/publicacao">Publicação</a>
+                  </li>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="/agendamento">Agendamento</a>
+                  </li>
+                  <li class="nav-item active dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Jogo</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/jogo">Jogo</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/genero">Gênero</a>
+                        <a class="dropdown-item" href="/produtora">Produtora</a>
+                      </div>
                   </li>
                 </ul>
+                <form class="form-inline my-2 my-lg-0">
+                  <a href="/usuario"><span class="glyphicon glyphicon-user" style="color: white;"></span></a>
+                </form>
             </div>
         </nav>
         <nav th:fragment="login" class="navbar navbar-expand-lg navbar-dark bg-dark"></nav>

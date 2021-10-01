@@ -5,9 +5,72 @@
     <head th:include="layout :: htmlhead"></head>
 
     <body>
-        <div class="container">
+        <div class="">
             <nav th:replace="layout :: menu">(menu)</nav>
-            <div class="border border-dark">
+
+            <div class="card" style="margin:2%;">
+                <div class="card-header">
+                    <h5 style="text-align: center; margin: 1% 0 2% 0;">Cadastro de Usuário</h5>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/usuario/(form)}" th:object="${usuario}" method="POST" enctype="multipart/form-data" style="margin: 1%;">
+                        <div class="form-row">
+                            <input type="hidden" th:field="*{id}">
+                            <div class="form-group col-md-4">
+                                <!-- <div class="row">
+                                    <img th:src="@{'/usuario/image/'+*{id}}" style="width: 100px; height: 100px;">
+                                </div> -->
+                                <label >Foto</label>
+                                <input type="file" name="file" class="form-control-file">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Nome</label>
+                                <input type="text" th:field="*{nome}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Sobrenome</label>
+                                <input type="text" th:field="*{sobrenome}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Idade</label>
+                                <input type="text" th:field="*{idade}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Nickname</label>
+                                <input type="text" th:field="*{nickName}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >E-mail</label>
+                                <input type="email" th:field="*{email}" class="form-control" placeholder="nome@exemplo.com">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Jogos</label>
+                                <input type="text" th:field="*{jogos}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Endereço</label>
+                                <input type="text" th:field="*{endereco}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Data de Nascimento</label>
+                                <input type="text" th:field="*{dataNascimento}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Login</label>
+                                <input type="text" th:field="*{login}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label >Senha</label>
+                                <input type="text" th:field="*{senha}" class="form-control">
+                            </div>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                    </form>
+                </div>
+              </div>
+
+            <!-- <div class="border border-dark">
                 <form th:action="@{/usuario/(form)}" th:object="${usuario}" method="POST"
                     enctype="multipart/form-data">
                     <input type="hidden" th:field="*{id}">
@@ -108,7 +171,7 @@
                     
                     <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
-            </div>
+            </div> -->
         </div>
         <div th:include="layout :: footer">(footer)</div>
     </body>
