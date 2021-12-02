@@ -27,7 +27,7 @@
                                 <a th:data-id="${umagendamento.id}" class="js-delete"> <span class="glyphicon glyphicon-trash" style="color: black;"></span></a>
                             </td>
                             <td th:text="${umagendamento.descricao}"></td>
-                            <td th:text="${#dates.format(umagendamento.dataHora, 'dd/MM/yyyy hh:mm')}"></td>
+                            <td th:text="${#dates.format(umagendamento.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
                         </tr>
                     </tbody>
                 </table> 

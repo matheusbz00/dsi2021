@@ -23,8 +23,8 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String descricao;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(value = TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date dataHora;
 
     @ManyToMany(cascade = CascadeType.REFRESH)

@@ -14,6 +14,7 @@
                 </div>
                 <div class="card-body">
                     <form th:action="@{/jogo/(form)}" th:object="${jogo}" method="POST" style="margin: 1%;">
+                        <input type="hidden" th:field="*{id}">
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label >Nome</label>
@@ -25,7 +26,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label >Plataformas</label>
-                                <!-- <input type="text" th:field="*{plataformas}" class="form-control"> -->
+                                 <!-- <input type="text" th:field="*{plataformas}" class="form-control">  -->
                                 <select class="form-control">
                                     <option value="PC">PC</option>
                                     <option value="PS4">PS4</option>

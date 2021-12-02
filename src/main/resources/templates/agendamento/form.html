@@ -7,13 +7,13 @@
     <body>
         <div class="">
             <nav th:replace="layout :: menu (buttons = ${ {} })">(menu)</nav>
-            
             <div class="card" style="margin:2%;">
                 <div class="card-header">
                     <h5 style="text-align: center; margin: 1% 0 2% 0;">Cadastro de Agendamento</h5>
                 </div>
                 <div class="card-body">
                     <form th:action="@{/agendamento/(form)}" th:object="${agendamento}" method="POST" style="margin: 1%;">
+                        <input type="hidden" th:field="*{id}">
                         <div class="form-row">
                             <div class="form-group col-md-9">
                                 <label >Descrição</label>
